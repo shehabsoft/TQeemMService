@@ -1,0 +1,60 @@
+{
+  "generator-jhipster": {
+    "applicationType": "microservice",
+    "authenticationType": "oauth2",
+    "baseName": "TQeemMService",
+    "blueprints": [],
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1693913659656,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "dtoSuffix": "DTO",
+    "enableGradleEnterprise": false,
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "entitySuffix": "",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "7.9.2",
+    "jwtSecretKey": "Y2RhYzE2NGRhNjQyN2M3YWZiZTkwZjAwMGQwNjM4ZGQ4OGRhMTdhMWVjMDMyMGZiNDJhOTZmYTAyNmRlZmFhZjhlNDU2M2VhNWRjOGE5OTRjMmQxNDY0ZTc5MjI4NmMxZGU2ODkzZGU2YTUwNjdjMWQzZjg1ZDExN2RmOTJmNjE=",
+    "languages": ["en", "ar-ly"],
+    "messageBroker": "kafka",
+    "microfrontend": true,
+    "microfrontends": [],
+    "nativeLanguage": "en",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-es-entity-reindexer",
+        "version": "1.0.1"
+      },
+      {
+        "name": "generator-jhipster-postgres-uuid",
+        "version": "0.0.6"
+      },
+      {
+        "name": "generator-jhipster-gql",
+        "version": "0.1.2"
+      },
+      {
+        "name": "generator-jhipster-kafka",
+        "version": "1.0.1"
+      }
+    ],
+    "packageName": "com.tqeem",
+    "pages": [],
+    "prodDatabaseType": "postgresql",
+    "reactive": false,
+    "searchEngine": "elasticsearch",
+    "serverPort": "5566",
+    "serverSideOptions": ["searchEngine:elasticsearch", "messageBroker:kafka"],
+    "serviceDiscoveryType": "no",
+    "skipCheckLengthOfIdentifier": false,
+    "skipClient": true,
+    "skipFakeData": false,
+    "skipUserManagement": true,
+    "testFrameworks": [],
+    "websocket": false,
+    "withAdminUi": false
+  }
+}
