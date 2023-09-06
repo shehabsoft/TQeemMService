@@ -5,9 +5,13 @@ import com.tqeem.security.SecurityUtils;
 import com.tqeem.security.oauth2.AudienceValidator;
 import com.tqeem.security.oauth2.JwtGrantedAuthorityConverter;
 import java.util.*;
+
+import org.camunda.bpm.webapp.impl.security.auth.ContainerBasedAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -21,6 +25,7 @@ import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
+import org.springframework.web.context.request.RequestContextListener;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 import tech.jhipster.config.JHipsterProperties;
 
@@ -103,4 +108,22 @@ public class SecurityConfiguration {
 
         return jwtDecoder;
     }
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        @Bean
+        public FilterRegistrationBean containerBasedAuthenticationFilter(){
+
+            FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
+            filterRegistration.setFilter(new ContainerBasedAuthenticationFilter());
+            filterRegistration.setInitParameters(Collections.singletonMap("authentication-provider", "com.tqeem.config.KeycloakAuthenticationProvider"));
+            filterRegistration.setOrder(101); // make sure the filter is registered after the Spring Security Filter Chain
+            filterRegistration.addUrlPatterns("/app/*");
+            return filterRegistration;
+        }
+
+        @Bean
+        @Order(0)
+        public RequestContextListener requestContextListener() {
+            return new RequestContextListener();
+        }
 }
+

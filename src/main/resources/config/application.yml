@@ -184,13 +184,32 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://localhost:8080/realms/jhipster
+            issuer-uri: http://localhost:8080/realms/system
+            authorization-uri: http://localhost:8080/realms/system/protocol/openid-connect/auth
+            user-info-uri: http://localhost:8080/realms/system/protocol/openid-connect/userinfo
+            token-uri: http://localhost:8080/realms/system/protocol/openid-connect/token
+            jwk-set-uri: http://localhost:8080/realms/system/protocol/openid-connect/certs
+            # set user-name-attribute one of: authorization_code client_credentials
+            # - sub                -> default; using keycloak ID as camunda user ID
+            # - email              -> useEmailAsCamundaUserId=true
+            # - preferred_username -> useUsernameAsCamundaUserId=true
+            user-name-attribute: preferred_username
         registration:
           oidc:
-            client-id: web-app
-            client-secret: web-app
-            scope: openid, profile, email, offline_access # last one for refresh tokens
-
+            client-id: camunda-identity-service
+            client-secret: GX40Y5v9Mbh6OllbgKMF0gfk0nVHQBxn
+            authorization-grant-type: authorization_code
+            redirect-uri: 'http://localhost:5566/camunda/app/welcome/default/login/oauth2/code/keycloak'
+            scope: openid, profile, email
+# Camunda Keycloak Identity Provider Plugin
+plugin.identity.keycloak:
+  keycloakIssuerUrl: http://localhost:8080/realms/system
+  keycloakAdminUrl: http://localhost:8080/admin/realms/system
+  clientId: dha_core_services
+  clientSecret: an5NG29PVv4WXKgZWF3xmBBd0Y8Zsbeh
+  useUsernameAsCamundaUserId: true
+  useGroupPathAsCamundaGroupId: true
+  administratorGroupName: camunda-admin
 server:
   servlet:
     session:
